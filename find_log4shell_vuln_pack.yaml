@@ -1,0 +1,15 @@
+---
+- hosts: hosts
+  become: yes
+  remote_user: user
+
+  tasks:
+   - name: Find .jar driver.
+     find:
+       paths: /
+       patterns: 'log4j*.jar'
+       recurse: yes
+     register: output
+
+   - debug: var=item.path
+     with_items: "{{ output.files }}"
