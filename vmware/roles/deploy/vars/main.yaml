@@ -1,1 +1,20 @@
 
+#Dados de login
+vcenter_hostname: ""
+vcenter_username: ""
+vcenter_password: ""
+
+#Dados da VM
+vm_name: ""
+vm_ip:
+vm_gw:
+
+#Dados do ambiente vcenter
+h_name: ""
+dc_name: ""
+dc_dir: ""
+cl_name: ""
+ds_name: ""
+
+#Dados da rede
+net_name: ""
