@@ -1,0 +1,36 @@
+
+---
+- hosts: elasticsearch
+  become: yes
+  tasks:
+    #Update stack
+    - name: update elasticsearch
+      yum:
+        name: "{{ item }}"
+        state: latest
+      loop:
+        - "https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.16.2-x86_64.rpm"
+        - "https://artifacts.elastic.co/downloads/kibana/kibana-7.16.2-x86_64.rpm"
+        - "https://artifacts.elastic.co/downloads/logstash/logstash-7.16.2-x86_64.rpm"
+
+    #If behind a http[s] proxy
+      #environment:
+      #  http_proxy:  
+      #  https_proxy:      
+      #  no_proxy: "localhost,127.0.0.1"
+
+    #If kibana in 443 port or below 1024
+    - name: setcap kibana
+      shell:
+      cmd: setcap cap_net_bind_service=+epi /usr/share/kibana/node/bin/node
+
+    #Restart services
+    - name: restart elasticsearch
+      systemd:
+        name: "{{ item }}"
+        state: restarted
+      loop:
+        - elasticsearch
+        - kibana
+        - logstash
+
