@@ -1,0 +1,12 @@
+- name: Realizando checagem de datastores
+  community.vmware.vmware_datastore_info:
+    validate_certs: False
+    hostname: '{{ vcenter_hostname }}'
+    username: '{{ vcenter_username }}'
+    password: '{{ vcenter_password }}'
+    datacenter_name: '{{ dc_name }}'
+    properties:
+      - name
+      - freeSpace
+  delegate_to: localhost
+  register: info
