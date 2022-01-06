@@ -1,0 +1,42 @@
+- name: Deploy VM "{{ vm_name }}" on "{{ vcenter_hostname }}" - "{{ cl_name }}" - 4 Minutos Aprox.
+  vmware_guest:
+    hostname: "{{ vcenter_hostname }}"
+    username: "{{ vcenter_username }}"
+    password: "{{ vcenter_password }}"
+    validate_certs: False
+    name: "{{ vm_name }}"
+    template: TEMPLATE_RHEL84_x86_ATUAL
+    datacenter: "{{ dc_name }}"
+    folder: LINUX
+    cluster: "{{ cl_name }}"
+    datastore: "{{ ds_name }}"
+    networks:
+    - name: "{{ net_name }}"
+      ip: "{{ vm_ip }}"
+      netmask: 255.255.255.0
+      gateway: "{{ vm_gw }}"
+      type: static
+      dns_servers: x.x.x.x
+      start_connected: yes
+    customization:
+      hostname: "{{ vm_name }}"
+      domain: domain.xxx
+      dns_suffix:
+      - sub.domain.xxx
+      - domain2.xxx
+      dns_servers:
+      - x.x.x.x
+      - x.x.x.x
+      - x.x.x.x
+    state: poweredon
+    wait_for_ip_address: yes
+  delegate_to: localhost
+
+- name: The vm "{{ vm_name }}" is accessible via ssh - "{{ vm_ip }}"
+  shell: ping -c4 "{{ vm_ip }}"
+  register: ping
+
+- name: 'Check ping'
+  debug:
+    msg: "{{ ping.stdout_lines }}"
+
