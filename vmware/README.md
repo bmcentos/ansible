@@ -1,4 +1,7 @@
-Modo de uso:
+Modo de uso:Ha duas roles no arquivo playbook.yaml
+  - ds_list = Lista Datastores do vcenter
+  - deploy = Realiza o deploy de uma maquina virtual baseado em TEMPLATE de sistema no vCenter
+
 
 -Interativo:
 #./deploy.sh <env>
