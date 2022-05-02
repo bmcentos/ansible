@@ -1,4 +1,19 @@
 - hosts: localhost
+  connection: local
+  vars_prompt:
+    - name: vcenter_username
+      prompt: Usuario vCenter
+      private: no
+    - name: vcenter_password
+      prompt: Senha vCenter
+  vars:
+    - rdm: RDM00  #Adicione aqui a RDM/INC
+    - vcenter_hostname: vcenter-hostname
+    - datacenter_name: SeuDatacenter
+      # Datacenters: Adicione comentario com seus datacenters para facilitar
+    - grupo: k8s_dev    #Grupo de maquinas segundo inventario
   roles:
-    - ds_list
-    - deploy
+#    - cria_snapshot
+#    - remove_snapshot
+#    - ds_list
+#    - deploy
