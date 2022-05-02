@@ -1,9 +1,11 @@
 Modo de uso:Ha duas roles no arquivo playbook.yaml
   - ds_list = Lista Datastores do vcenter
   - deploy = Realiza o deploy de uma maquina virtual baseado em TEMPLATE de sistema no vCenter
+  - cria_snapshot = Cria Snapshot de grupo de maquinas
+  - remove_snapshot = Remove snapshot de grupos de maquinas
 
 
--Interativo:
+-Para deploy iterativo de remove_snapshot Interativo de VM:
 #./deploy.sh <env>
 
   Ou
