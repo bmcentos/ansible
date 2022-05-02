@@ -1,0 +1,13 @@
+- name: Removendo todos os snapshots
+  community.vmware.vmware_guest_snapshot:
+    validate_certs: False
+    hostname: "{{ vcenter_hostname }}"
+    username: "{{ vcenter_username }}"
+    password: "{{ vcenter_password }}"
+    datacenter: "{{ datacenter_name }}"
+    folder: "/{{ datacenter_name }}/vm/"
+    name: "{{ item|upper }}"
+    state: remove_all
+  with_inventory_hostnames:
+    - "{{ grupo }}"
+  delegate_to: localhost
